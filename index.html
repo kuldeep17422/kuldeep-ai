@@ -643,7 +643,7 @@ let chatHistory = JSON.parse(
 
 /* SEND MESSAGE */
 
-function sendMessage() {
+async function sendMessage() {
 
     const text = input.value.trim();
 
@@ -659,22 +659,53 @@ function sendMessage() {
 
     showTyping();
 
-    /*
-       DEMO RESPONSE
+    try {
 
-       Later we will replace this section with
-       a secure AI API/backend connection.
-    */
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are KULDEEP AI, a helpful personal AI assistant. Answer clearly and helpfully. You can communicate in Hindi, English, or Hinglish."
+                    },
+                    {
+                        role: "user",
+                        content: text
+                    }
+                ]
+            })
+        });
 
-    setTimeout(() => {
+        const data = await response.json();
 
         removeTyping();
 
-        const response = generateDemoResponse(text);
+        if (!response.ok) {
+            addMessage(
+                "Sorry, AI service mein problem aa gayi. Please try again.",
+                "ai"
+            );
+            console.error(data);
+            return;
+        }
 
-        addMessage(response, "ai");
+        addMessage(data.reply, "ai");
 
-    }, 900);
+    } catch (error) {
+
+        removeTyping();
+
+        addMessage(
+            "KULDEEP AI server se connect nahi ho pa raha. Please try again.",
+            "ai"
+        );
+
+        console.error(error);
+    }
 }
 
 
