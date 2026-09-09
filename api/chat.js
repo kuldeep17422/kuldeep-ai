@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       weekday: "long"
     }).format(now);
 
-    // Convert OpenAI-style messages to Gemini format
+    // Convert conversation to Gemini format
     const conversation = messages
       .filter((message) => message.role !== "system")
       .map((message) => ({
@@ -78,24 +78,29 @@ ${indiaDay}
 Current India time:
 ${indiaTime}
 
-Important rules:
+Rules:
 - Match the user's language.
 - Be friendly and helpful.
-- Remember the conversation context provided in the messages.
-- Answer clearly and accurately.
-- For technical questions, explain step by step.
+- Use the conversation history for context.
+- Give clear and accurate answers.
+- For current, recent, latest, breaking, live, or today's information, use Google Search grounding when available.
+- If web search results are available, base current-information answers on them.
+- Do not invent sources or facts.
+- For normal questions that do not need current information, answer normally.
 - If the user asks "aaj", "kal", "yesterday", etc., use the current India date above.
-- Do not pretend to have capabilities you do not have.
-    `.trim();
+- For technical questions, explain step by step.
+`.trim();
 
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent",
       {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
           "x-goog-api-key": process.env.GEMINI_API_KEY
         },
+
         body: JSON.stringify({
           systemInstruction: {
             parts: [
@@ -107,6 +112,12 @@ Important rules:
 
           contents: conversation,
 
+          tools: [
+            {
+              google_search: {}
+            }
+          ],
+
           generationConfig: {
             temperature: 0.7,
             maxOutputTokens: 2048
@@ -117,7 +128,6 @@ Important rules:
 
     const data = await response.json();
 
-    // Gemini error
     if (!response.ok) {
       console.error("Gemini API Error:", {
         status: response.status,
@@ -131,6 +141,7 @@ Important rules:
       });
     }
 
+    // Get AI reply
     const reply = data?.candidates?.[0]?.content?.parts
       ?.map((part) => part.text || "")
       .join("")
@@ -144,8 +155,36 @@ Important rules:
       });
     }
 
+    // Get Google Search sources
+    const groundingChunks =
+      data?.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
+
+    const sources = groundingChunks
+      .map((chunk) => {
+        const web = chunk?.web;
+
+        if (!web?.uri) {
+          return null;
+        }
+
+        return {
+          title: web.title || "Web source",
+          url: web.uri
+        };
+      })
+      .filter(Boolean);
+
+    // Remove duplicate URLs
+    const uniqueSources = Array.from(
+      new Map(
+        sources.map((source) => [source.url, source])
+      ).values()
+    ).slice(0, 6);
+
     return res.status(200).json({
-      reply: reply
+      reply,
+      sources: uniqueSources,
+      realtime: uniqueSources.length > 0
     });
 
   } catch (error) {
