@@ -1,5 +1,4 @@
 export default async function handler(req, res) {
-  // Only POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -9,23 +8,19 @@ export default async function handler(req, res) {
   try {
     const { messages } = req.body || {};
 
-    // Check messages
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({
         error: "Invalid messages"
       });
     }
 
-    // Check API key
     if (!process.env.GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY is missing");
-
       return res.status(500).json({
-        error: "GEMINI_API_KEY is not configured in Vercel"
+        error: "GEMINI_API_KEY is missing"
       });
     }
 
-    // Convert messages to Gemini format
+    // Convert chat history to Gemini format
     const conversation = messages
       .filter((message) => message.role !== "system")
       .map((message) => ({
@@ -36,71 +31,61 @@ export default async function handler(req, res) {
           }
         ]
       }))
-      .filter(
-        (message) =>
-          message.parts[0].text.trim().length > 0
-      );
+      .filter((message) => {
+        return message.parts[0].text.trim() !== "";
+      });
 
     if (conversation.length === 0) {
       return res.status(400).json({
-        error: "No valid message found"
+        error: "No valid conversation found"
       });
     }
 
-    // KULDEEP AI instructions
     const systemInstruction = `
 You are KULDEEP AI, a helpful personal AI assistant.
 
-You can communicate in:
-- Hindi
-- English
-- Hinglish
+You can communicate in Hindi, English, or Hinglish.
 
-Instructions:
-- Match the language used by the user.
-- Be friendly, clear and helpful.
-- Remember the conversation context provided in the request.
+Rules:
+- Match the user's language.
+- Be friendly and helpful.
+- Use the conversation history to understand context.
+- Give clear and accurate answers.
 - For technical questions, explain step by step.
-- Do not make up information.
-- Keep answers easy to understand.
-`.trim();
+- Do not pretend to have capabilities you do not have.
+    `.trim();
 
-    // Gemini API URL
-    const apiUrl =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent",
+      {
+        method: "POST",
 
-    const requestBody = {
-      systemInstruction: {
-        parts: [
-          {
-            text: systemInstruction
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": process.env.GEMINI_API_KEY
+        },
+
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [
+              {
+                text: systemInstruction
+              }
+            ]
+          },
+
+          contents: conversation,
+
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 2048
           }
-        ]
-      },
-
-      contents: conversation,
-
-      generationConfig: {
-        temperature: 0.7,
-        maxOutputTokens: 2048
+        })
       }
-    };
-
-    // Call Gemini
-    const response = await fetch(apiUrl, {
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": process.env.GEMINI_API_KEY
-      },
-
-      body: JSON.stringify(requestBody)
-    });
+    );
 
     const data = await response.json();
 
-    // Gemini error
     if (!response.ok) {
       console.error("Gemini API Error:", {
         status: response.status,
@@ -114,24 +99,21 @@ Instructions:
       });
     }
 
-    // Get AI response
     const reply = data?.candidates?.[0]?.content?.parts
       ?.map((part) => part.text || "")
       .join("")
       .trim();
 
-    // Empty response
     if (!reply) {
-      console.error("Gemini returned no text:", data);
+      console.error("Empty Gemini response:", data);
 
       return res.status(502).json({
         error: "Gemini returned an empty response"
       });
     }
 
-    // Send reply to frontend
     return res.status(200).json({
-      reply
+      reply: reply
     });
 
   } catch (error) {
