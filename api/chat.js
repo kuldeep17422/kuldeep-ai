@@ -1,4 +1,5 @@
 export default async function handler(req, res) {
+  // Only POST requests
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -6,15 +7,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages } = req.body;
+    const { messages } = req.body || {};
 
+    // Check messages
     if (!Array.isArray(messages) || messages.length === 0) {
       return res.status(400).json({
-        error: "No messages provided"
+        error: "Invalid messages"
       });
     }
 
-    // Convert chat messages to Gemini format
+    // Check API key
+    if (!process.env.GEMINI_API_KEY) {
+      console.error("GEMINI_API_KEY is missing");
+
+      return res.status(500).json({
+        error: "GEMINI_API_KEY is not configured in Vercel"
+      });
+    }
+
+    // Convert messages to Gemini format
     const conversation = messages
       .filter((message) => message.role !== "system")
       .map((message) => ({
@@ -25,115 +36,100 @@ export default async function handler(req, res) {
           }
         ]
       }))
-      .filter((message) => message.parts[0].text.trim() !== "");
+      .filter(
+        (message) =>
+          message.parts[0].text.trim().length > 0
+      );
 
     if (conversation.length === 0) {
       return res.status(400).json({
-        error: "No valid message provided"
+        error: "No valid message found"
       });
     }
 
-    // Check that the Vercel environment variable exists
-    if (!process.env.GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY is missing");
-
-      return res.status(500).json({
-        error: "Gemini API key is not configured"
-      });
-    }
-
-    const systemText = `
+    // KULDEEP AI instructions
+    const systemInstruction = `
 You are KULDEEP AI, a helpful personal AI assistant.
 
-Rules:
-- Answer clearly and helpfully.
-- You can communicate in Hindi, English, or Hinglish.
-- Match the user's language.
-- Be friendly and natural.
-- Use the previous conversation to understand context.
+You can communicate in:
+- Hindi
+- English
+- Hinglish
+
+Instructions:
+- Match the language used by the user.
+- Be friendly, clear and helpful.
+- Remember the conversation context provided in the request.
 - For technical questions, explain step by step.
+- Do not make up information.
+- Keep answers easy to understand.
 `.trim();
+
+    // Gemini API URL
+    const apiUrl =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
     const requestBody = {
       systemInstruction: {
         parts: [
           {
-            text: systemText
+            text: systemInstruction
           }
         ]
       },
+
       contents: conversation,
+
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 2048
       }
     };
 
-    const apiUrl =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent";
+    // Call Gemini
+    const response = await fetch(apiUrl, {
+      method: "POST",
 
-    let response;
-    let data;
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": process.env.GEMINI_API_KEY
+      },
 
-    // Try up to 2 times
-    for (let attempt = 1; attempt <= 2; attempt++) {
-      response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": process.env.GEMINI_API_KEY
-        },
-        body: JSON.stringify(requestBody)
-      });
+      body: JSON.stringify(requestBody)
+    });
 
-      data = await response.json();
+    const data = await response.json();
 
-      // Success
-      if (response.ok) {
-        break;
-      }
-
-      // Retry temporary server errors
-      if (
-        (response.status === 503 || response.status === 429) &&
-        attempt < 2
-      ) {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        continue;
-      }
-
-      break;
-    }
-
-    // Gemini returned an error
+    // Gemini error
     if (!response.ok) {
       console.error("Gemini API Error:", {
         status: response.status,
-        message: data?.error?.message
+        error: data?.error
       });
 
       return res.status(response.status).json({
         error:
           data?.error?.message ||
-          `Gemini API error (${response.status})`
+          `Gemini API error: ${response.status}`
       });
     }
 
-    // Extract Gemini response
-    const reply =
-      data?.candidates?.[0]?.content?.parts
-        ?.map((part) => part.text || "")
-        .join("")
-        .trim();
+    // Get AI response
+    const reply = data?.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text || "")
+      .join("")
+      .trim();
 
+    // Empty response
     if (!reply) {
-      console.error("Empty Gemini response:", data);
+      console.error("Gemini returned no text:", data);
 
       return res.status(502).json({
         error: "Gemini returned an empty response"
       });
     }
 
+    // Send reply to frontend
     return res.status(200).json({
       reply
     });
@@ -142,7 +138,7 @@ Rules:
     console.error("KULDEEP AI Server Error:", error);
 
     return res.status(500).json({
-      error: "Server error"
+      error: error?.message || "Server error"
     });
   }
 }
