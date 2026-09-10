@@ -1,8 +1,4 @@
 export default async function handler(req, res) {
-  // ==============================
-  // METHOD CHECK
-  // ==============================
-
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -10,23 +6,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    // ==============================
-    // GEMINI API KEY
-    // ==============================
-
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing");
-
       return res.status(500).json({
         error: "GEMINI_API_KEY is missing"
       });
     }
-
-    // ==============================
-    // REQUEST DATA
-    // ==============================
 
     const {
       prompt,
@@ -34,20 +20,13 @@ export default async function handler(req, res) {
       imageSize = "1K"
     } = req.body || {};
 
-    // ==============================
-    // PROMPT CHECK
-    // ==============================
-
     if (!prompt || !String(prompt).trim()) {
       return res.status(400).json({
         error: "Image prompt is required"
       });
     }
 
-    // ==============================
-    // VALID ASPECT RATIOS
-    // ==============================
-
+    // Supported by Gemini 3.1 Flash Image
     const allowedAspectRatios = [
       "1:1",
       "1:4",
@@ -81,11 +60,6 @@ export default async function handler(req, res) {
         ? imageSize
         : "1K";
 
-    // ==============================
-    // GEMINI 3.1 FLASH IMAGE
-    // INTERACTIONS API
-    // ==============================
-
     const response = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
@@ -103,22 +77,23 @@ export default async function handler(req, res) {
 
           response_format: {
             type: "image",
-            mime_type: "image/png",
+
+            // IMPORTANT:
+            // Gemini currently supports JPEG here
+            mime_type: "image/jpeg",
+
             aspect_ratio: finalAspectRatio,
+
             image_size: finalImageSize
           }
         })
       }
     );
 
-    // ==============================
-    // READ RESPONSE
-    // ==============================
-
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Gemini Image API Error:", {
+      console.error("Gemini Image Error:", {
         status: response.status,
         error: data?.error
       });
@@ -130,16 +105,13 @@ export default async function handler(req, res) {
       });
     }
 
-    // ==============================
-    // GET GENERATED IMAGE
-    // ==============================
-
+    // Gemini returns the generated image here
     const imageBase64 =
       data?.output_image?.data;
 
     if (!imageBase64) {
       console.error(
-        "Gemini returned no output_image:",
+        "No generated image found:",
         JSON.stringify(data)
       );
 
@@ -149,17 +121,13 @@ export default async function handler(req, res) {
       });
     }
 
-    // ==============================
-    // RETURN IMAGE
-    // ==============================
-
     return res.status(200).json({
       success: true,
 
       imageDataUrl:
-        `data:image/png;base64,${imageBase64}`,
+        `data:image/jpeg;base64,${imageBase64}`,
 
-      mimeType: "image/png",
+      mimeType: "image/jpeg",
 
       aspectRatio: finalAspectRatio,
 
