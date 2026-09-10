@@ -1,4 +1,8 @@
 export default async function handler(req, res) {
+  // ==============================
+  // METHOD CHECK
+  // ==============================
+
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Method not allowed"
@@ -7,22 +11,21 @@ export default async function handler(req, res) {
 
   try {
     // ==============================
-    // 1. CHECK GEMINI API KEY
+    // GEMINI API KEY
     // ==============================
 
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing from Vercel");
+      console.error("GEMINI_API_KEY is missing");
 
       return res.status(500).json({
-        error:
-          "GEMINI_API_KEY is missing. Add GEMINI_API_KEY in Vercel Environment Variables and redeploy."
+        error: "GEMINI_API_KEY is missing"
       });
     }
 
     // ==============================
-    // 2. GET REQUEST DATA
+    // REQUEST DATA
     // ==============================
 
     const {
@@ -31,6 +34,10 @@ export default async function handler(req, res) {
       imageSize = "1K"
     } = req.body || {};
 
+    // ==============================
+    // PROMPT CHECK
+    // ==============================
+
     if (!prompt || !String(prompt).trim()) {
       return res.status(400).json({
         error: "Image prompt is required"
@@ -38,42 +45,49 @@ export default async function handler(req, res) {
     }
 
     // ==============================
-    // 3. ALLOWED SETTINGS
+    // VALID ASPECT RATIOS
     // ==============================
 
-    const allowedRatios = [
+    const allowedAspectRatios = [
       "1:1",
-      "16:9",
-      "9:16",
-      "4:3",
-      "3:4",
-      "21:9",
-      "5:4",
-      "4:5",
+      "1:4",
+      "1:8",
+      "2:3",
       "3:2",
-      "2:3"
+      "3:4",
+      "4:3",
+      "4:5",
+      "5:4",
+      "4:1",
+      "8:1",
+      "9:16",
+      "16:9",
+      "21:9"
     ];
 
-    const allowedSizes = [
+    const allowedImageSizes = [
       "1K",
       "2K",
       "4K"
     ];
 
-    const finalAspectRatio = allowedRatios.includes(aspectRatio)
-      ? aspectRatio
-      : "1:1";
+    const finalAspectRatio =
+      allowedAspectRatios.includes(aspectRatio)
+        ? aspectRatio
+        : "1:1";
 
-    const finalImageSize = allowedSizes.includes(imageSize)
-      ? imageSize
-      : "1K";
+    const finalImageSize =
+      allowedImageSizes.includes(imageSize)
+        ? imageSize
+        : "1K";
 
     // ==============================
-    // 4. CALL GEMINI IMAGE API
+    // GEMINI 3.1 FLASH IMAGE
+    // INTERACTIONS API
     // ==============================
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1/models/gemini-3.1-flash-image:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
 
@@ -83,32 +97,22 @@ export default async function handler(req, res) {
         },
 
         body: JSON.stringify({
-          contents: [
-            {
-              parts: [
-                {
-                  text: String(prompt).trim()
-                }
-              ]
-            }
-          ],
+          model: "gemini-3.1-flash-image",
 
-          generationConfig: {
-            responseModalities: ["IMAGE"],
+          input: String(prompt).trim(),
 
-            responseFormat: {
-              image: {
-                aspectRatio: finalAspectRatio,
-                imageSize: finalImageSize
-              }
-            }
+          response_format: {
+            type: "image",
+            mime_type: "image/png",
+            aspect_ratio: finalAspectRatio,
+            image_size: finalImageSize
           }
         })
       }
     );
 
     // ==============================
-    // 5. READ GEMINI RESPONSE
+    // READ RESPONSE
     // ==============================
 
     const data = await response.json();
@@ -127,54 +131,35 @@ export default async function handler(req, res) {
     }
 
     // ==============================
-    // 6. FIND GENERATED IMAGE
+    // GET GENERATED IMAGE
     // ==============================
 
-    const parts =
-      data?.candidates?.[0]?.content?.parts || [];
+    const imageBase64 =
+      data?.output_image?.data;
 
-    const imagePart = parts.find(
-      (part) =>
-        part?.inlineData?.data ||
-        part?.inline_data?.data
-    );
-
-    const imageData =
-      imagePart?.inlineData?.data ||
-      imagePart?.inline_data?.data;
-
-    const mimeType =
-      imagePart?.inlineData?.mimeType ||
-      imagePart?.inline_data?.mime_type ||
-      "image/png";
-
-    // ==============================
-    // 7. NO IMAGE ERROR
-    // ==============================
-
-    if (!imageData) {
+    if (!imageBase64) {
       console.error(
-        "Gemini response did not contain image:",
+        "Gemini returned no output_image:",
         JSON.stringify(data)
       );
 
       return res.status(502).json({
         error:
-          "Gemini did not return an image. Please try another prompt."
+          "Gemini did not return an image."
       });
     }
 
     // ==============================
-    // 8. SEND IMAGE TO FRONTEND
+    // RETURN IMAGE
     // ==============================
 
     return res.status(200).json({
       success: true,
 
       imageDataUrl:
-        `data:${mimeType};base64,${imageData}`,
+        `data:image/png;base64,${imageBase64}`,
 
-      mimeType,
+      mimeType: "image/png",
 
       aspectRatio: finalAspectRatio,
 
