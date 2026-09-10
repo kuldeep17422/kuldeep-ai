@@ -1,1 +1,7 @@
-
+{
+  "name": "kuldeep-ai",
+  "private": true,
+  "dependencies": {
+    "@google/genai": "latest"
+  }
+}
