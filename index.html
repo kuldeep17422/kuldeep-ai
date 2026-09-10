@@ -18,6 +18,7 @@
 <link rel="apple-touch-icon" href="/icon-192.png">
 
 <style>
+
 :root{
     --bg:#07080c;
     --bg2:#0a0c12;
@@ -78,6 +79,7 @@ body{
         var(--bg);
 
     color:var(--text);
+
     font-family:
         Inter,
         ui-sans-serif,
@@ -91,7 +93,9 @@ body{
 }
 
 button,
-textarea{
+textarea,
+select,
+input{
     font:inherit;
 }
 
@@ -151,8 +155,6 @@ button{
     padding:18px 14px;
 }
 
-/* logo */
-
 .brand{
     display:flex;
     align-items:center;
@@ -204,7 +206,9 @@ button{
     text-transform:uppercase;
 }
 
-/* new conversation */
+/* =========================================
+   NEW CHAT
+========================================= */
 
 .new-chat{
     width:100%;
@@ -238,6 +242,7 @@ button{
 
 .new-chat:hover{
     transform:translateY(-1px);
+
     border-color:rgba(130,120,255,.42);
 
     background:
@@ -253,7 +258,64 @@ button{
     height:17px;
 }
 
-/* section */
+/* =========================================
+   CREATE BUTTON
+========================================= */
+
+.create-studio-btn{
+    width:100%;
+    height:46px;
+
+    margin-top:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+
+    color:#e9eaff;
+
+    font-size:13px;
+    font-weight:700;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,124,255,.13),
+            rgba(25,201,237,.07)
+        );
+
+    border:1px solid rgba(139,124,255,.15);
+
+    transition:
+        transform .25s var(--ease),
+        border-color .25s ease,
+        background .25s ease;
+}
+
+.create-studio-btn:hover{
+    transform:translateY(-1px);
+
+    border-color:rgba(139,124,255,.38);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139,124,255,.22),
+            rgba(25,201,237,.12)
+        );
+}
+
+.create-studio-btn svg{
+    width:17px;
+    height:17px;
+}
+
+/* =========================================
+   SIDEBAR SECTION
+========================================= */
 
 .sidebar-section{
     margin-top:26px;
@@ -265,6 +327,7 @@ button{
     padding:0 7px 10px;
 
     color:#626a7c;
+
     font-size:10px;
     font-weight:750;
     letter-spacing:1.3px;
@@ -321,7 +384,9 @@ button{
     background:rgba(255,255,255,.055);
 }
 
-/* sidebar bottom */
+/* =========================================
+   SIDEBAR BOTTOM
+========================================= */
 
 .sidebar-bottom{
     padding-top:13px;
@@ -422,7 +487,9 @@ button{
     position:relative;
 }
 
-/* topbar */
+/* =========================================
+   TOPBAR
+========================================= */
 
 .topbar{
     height:62px;
@@ -437,6 +504,7 @@ button{
     border-bottom:1px solid var(--border);
 
     background:rgba(7,8,12,.58);
+
     backdrop-filter:blur(18px);
     -webkit-backdrop-filter:blur(18px);
 
@@ -470,6 +538,7 @@ button{
 .top-logo{
     width:8px;
     height:8px;
+
     border-radius:50%;
 
     background:#39e884;
@@ -511,6 +580,7 @@ button{
 .content{
     flex:1;
     min-height:0;
+
     position:relative;
     overflow:hidden;
 
@@ -518,12 +588,15 @@ button{
     flex-direction:column;
 }
 
-/* welcome */
+/* =========================================
+   WELCOME
+========================================= */
 
 .welcome{
     width:min(980px, calc(100% - 40px));
 
     margin:auto;
+
     padding:38px 0 125px;
 
     text-align:center;
@@ -536,6 +609,7 @@ button{
         opacity:0;
         transform:translateY(14px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -587,6 +661,7 @@ button{
 .hero-title{
     font-size:clamp(39px, 5vw, 62px);
     line-height:1.03;
+
     letter-spacing:-3.2px;
     font-weight:780;
 }
@@ -602,11 +677,13 @@ button{
 
     -webkit-background-clip:text;
     background-clip:text;
+
     color:transparent;
 }
 
 .hero-description{
     max-width:680px;
+
     margin:21px auto 0;
 
     color:#81899b;
@@ -615,7 +692,9 @@ button{
     line-height:1.7;
 }
 
-/* suggestion grid */
+/* =========================================
+   SUGGESTIONS
+========================================= */
 
 .suggestions{
     width:100%;
@@ -671,9 +750,11 @@ button{
     background:rgba(120,100,255,.13);
 
     filter:blur(30px);
+
     border-radius:50%;
 
     opacity:0;
+
     transition:.3s ease;
 }
 
@@ -735,6 +816,7 @@ button{
 
 .messages{
     flex:1;
+
     overflow-y:auto;
 
     width:100%;
@@ -762,10 +844,9 @@ button{
     margin:0 auto;
 }
 
-/* message */
-
 .message-row{
     display:flex;
+
     margin-bottom:27px;
 
     animation:messageIn .35s var(--ease);
@@ -776,6 +857,7 @@ button{
         opacity:0;
         transform:translateY(8px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
@@ -798,6 +880,7 @@ button{
     margin-bottom:7px;
 
     color:#687184;
+
     font-size:10px;
     font-weight:650;
 }
@@ -816,6 +899,7 @@ button{
     border-radius:7px;
 
     color:white;
+
     font-size:9px;
     font-weight:800;
 
@@ -842,8 +926,7 @@ button{
 }
 
 .message-row.assistant .bubble{
-    background:
-        rgba(255,255,255,.035);
+    background:rgba(255,255,255,.035);
 
     border:1px solid rgba(255,255,255,.065);
 
@@ -869,6 +952,7 @@ button{
     margin-top:6px;
 
     color:#4e5666;
+
     font-size:9px;
 }
 
@@ -902,6 +986,7 @@ button{
     border-radius:7px;
 
     color:#6e7789;
+
     background:rgba(255,255,255,.035);
 
     transition:.2s ease;
@@ -917,7 +1002,9 @@ button{
     height:13px;
 }
 
-/* typing */
+/* =========================================
+   TYPING
+========================================= */
 
 .typing{
     display:none;
@@ -959,6 +1046,7 @@ button{
     padding:10px 12px;
 
     border:1px solid var(--border);
+
     border-radius:10px;
 }
 
@@ -986,6 +1074,7 @@ button{
         transform:translateY(0);
         opacity:.45;
     }
+
     30%{
         transform:translateY(-4px);
         opacity:1;
@@ -1033,8 +1122,7 @@ button{
 
     border-radius:17px;
 
-    background:
-        rgba(16,19,28,.92);
+    background:rgba(16,19,28,.92);
 
     border:1px solid rgba(255,255,255,.09);
 
@@ -1092,6 +1180,7 @@ button{
     flex:1;
 
     width:100%;
+
     min-height:43px;
     max-height:150px;
 
@@ -1103,6 +1192,7 @@ button{
     border:0;
 
     color:#e9ecf2;
+
     background:transparent;
 
     font-size:13px;
@@ -1122,6 +1212,7 @@ button{
 .send-btn{
     width:43px;
     height:43px;
+
     flex-shrink:0;
 
     display:grid;
@@ -1176,6 +1267,7 @@ button{
     text-align:center;
 
     color:#414958;
+
     font-size:9px;
 }
 
@@ -1198,6 +1290,7 @@ button{
     border-radius:50%;
 
     color:#aeb5c3;
+
     background:#131720;
 
     border:1px solid var(--border-light);
@@ -1217,7 +1310,7 @@ button{
 }
 
 /* =========================================
-   MOBILE OVERLAY
+   OVERLAY
 ========================================= */
 
 .overlay{
@@ -1227,9 +1320,818 @@ button{
     inset:0;
 
     background:rgba(0,0,0,.55);
+
     backdrop-filter:blur(3px);
 
     z-index:20;
+}
+
+/* =========================================================
+   CREATE STUDIO
+========================================================= */
+
+.create-overlay{
+    position:fixed;
+    inset:0;
+
+    z-index:100;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+
+    background:rgba(2,3,7,.72);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+}
+
+.create-overlay.open{
+    display:flex;
+}
+
+.create-studio{
+    width:min(940px,100%);
+    max-height:min(780px,92vh);
+
+    display:flex;
+    flex-direction:column;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,23,34,.98),
+            rgba(10,12,18,.99)
+        );
+
+    border:1px solid rgba(255,255,255,.105);
+
+    box-shadow:
+        0 40px 120px rgba(0,0,0,.65),
+        0 0 80px rgba(105,91,255,.08);
+
+    animation:studioIn .35s var(--ease);
+}
+
+@keyframes studioIn{
+    from{
+        opacity:0;
+        transform:translateY(18px) scale(.975);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.studio-header{
+    min-height:76px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:16px 20px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.studio-heading{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.studio-icon{
+    width:43px;
+    height:43px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #786aff,
+            #4d9eff 55%,
+            #19c9ed
+        );
+
+    box-shadow:
+        0 10px 35px rgba(79,116,255,.20);
+}
+
+.studio-icon svg{
+    width:21px;
+    height:21px;
+}
+
+.studio-title{
+    font-size:16px;
+    font-weight:780;
+    letter-spacing:-.4px;
+}
+
+.studio-subtitle{
+    margin-top:3px;
+
+    color:#687184;
+
+    font-size:10px;
+}
+
+.studio-close{
+    width:36px;
+    height:36px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:10px;
+
+    color:#747d8e;
+
+    background:rgba(255,255,255,.035);
+
+    transition:.2s ease;
+}
+
+.studio-close:hover{
+    color:#fff;
+    background:rgba(255,255,255,.08);
+}
+
+.studio-close svg{
+    width:17px;
+    height:17px;
+}
+
+/* studio tabs */
+
+.studio-tabs{
+    display:flex;
+
+    gap:5px;
+
+    padding:12px 20px 0;
+}
+
+.studio-tab{
+    min-width:145px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:0 15px;
+
+    border-radius:10px 10px 0 0;
+
+    color:#747d8e;
+
+    background:transparent;
+
+    font-size:11px;
+    font-weight:700;
+
+    border-bottom:2px solid transparent;
+
+    transition:.2s ease;
+}
+
+.studio-tab:hover{
+    color:#cfd4df;
+}
+
+.studio-tab.active{
+    color:#f4f5fa;
+
+    background:rgba(255,255,255,.035);
+
+    border-bottom-color:#7e70ff;
+}
+
+.studio-tab svg{
+    width:15px;
+    height:15px;
+}
+
+/* studio body */
+
+.studio-body{
+    flex:1;
+    min-height:0;
+
+    overflow-y:auto;
+
+    padding:20px;
+}
+
+.studio-body::-webkit-scrollbar{
+    width:5px;
+}
+
+.studio-body::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.10);
+    border-radius:10px;
+}
+
+.studio-panel{
+    display:none;
+}
+
+.studio-panel.active{
+    display:block;
+}
+
+/* studio grid */
+
+.create-grid{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(270px,.72fr);
+
+    gap:18px;
+}
+
+/* studio cards */
+
+.studio-card{
+    padding:17px;
+
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.018)
+        );
+
+    border:1px solid rgba(255,255,255,.075);
+}
+
+.studio-card-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    margin-bottom:12px;
+
+    color:#e8ebf2;
+
+    font-size:12px;
+    font-weight:750;
+}
+
+.studio-card-title svg{
+    width:15px;
+    height:15px;
+
+    color:#8d81ff;
+}
+
+/* prompt */
+
+.create-prompt{
+    width:100%;
+
+    min-height:145px;
+
+    resize:vertical;
+
+    outline:none;
+
+    padding:13px;
+
+    color:#e9ecf3;
+
+    background:
+        rgba(5,7,12,.58);
+
+    border:1px solid rgba(255,255,255,.075);
+
+    border-radius:12px;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+.create-prompt:focus{
+    border-color:rgba(126,112,255,.45);
+
+    box-shadow:
+        0 0 0 3px rgba(126,112,255,.06);
+}
+
+.create-prompt::placeholder{
+    color:#555e70;
+}
+
+/* options */
+
+.option-grid{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+
+    margin-top:10px;
+}
+
+.option-field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.option-label{
+    color:#697285;
+
+    font-size:9px;
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    text-transform:uppercase;
+}
+
+.create-select{
+    width:100%;
+    height:40px;
+
+    padding:0 10px;
+
+    outline:none;
+
+    color:#dfe3ec;
+
+    background:#0b0e15;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:10px;
+
+    font-size:11px;
+}
+
+.create-select:focus{
+    border-color:rgba(126,112,255,.42);
+}
+
+/* generate button */
+
+.generate-btn{
+    width:100%;
+    height:47px;
+
+    margin-top:14px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    border-radius:12px;
+
+    color:#fff;
+
+    font-size:12px;
+    font-weight:750;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7668ff,
+            #4b9eff 58%,
+            #19c8e9
+        );
+
+    box-shadow:
+        0 10px 30px rgba(76,105,255,.20);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
+}
+
+.generate-btn:hover{
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 14px 38px rgba(76,105,255,.30);
+}
+
+.generate-btn:disabled{
+    opacity:.48;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.generate-btn svg{
+    width:17px;
+    height:17px;
+}
+
+/* result */
+
+.create-result{
+    min-height:300px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    border-radius:14px;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(110,96,255,.10),
+            transparent 45%
+        ),
+        #080b11;
+
+    border:1px solid rgba(255,255,255,.065);
+
+    position:relative;
+}
+
+.result-empty{
+    padding:30px;
+
+    text-align:center;
+
+    color:#596274;
+}
+
+.result-empty-icon{
+    width:48px;
+    height:48px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 12px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.04);
+
+    color:#6f7890;
+}
+
+.result-empty-icon svg{
+    width:22px;
+    height:22px;
+}
+
+.result-empty-title{
+    color:#858da0;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.result-empty-text{
+    max-width:250px;
+
+    margin:6px auto 0;
+
+    font-size:9px;
+    line-height:1.5;
+}
+
+/* generated image */
+
+.generated-image{
+    max-width:100%;
+    max-height:390px;
+
+    display:none;
+
+    object-fit:contain;
+
+    border-radius:10px;
+}
+
+/* generated video */
+
+.generated-video{
+    width:100%;
+    max-height:390px;
+
+    display:none;
+
+    object-fit:contain;
+
+    background:#000;
+
+    border-radius:10px;
+}
+
+/* result actions */
+
+.result-actions{
+    display:none;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:10px;
+}
+
+.result-actions.show{
+    display:grid;
+}
+
+.result-action{
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    border-radius:10px;
+
+    color:#b9c0ce;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,255,255,.065);
+
+    font-size:10px;
+    font-weight:700;
+
+    transition:.2s ease;
+}
+
+.result-action:hover{
+    color:#fff;
+
+    background:rgba(255,255,255,.075);
+}
+
+.result-action.primary{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(118,104,255,.25),
+            rgba(48,155,235,.18)
+        );
+
+    border-color:rgba(126,112,255,.20);
+}
+
+.result-action svg{
+    width:14px;
+    height:14px;
+}
+
+/* image uploader */
+
+.image-upload{
+    width:100%;
+
+    min-height:180px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    border-radius:13px;
+
+    border:1px dashed rgba(255,255,255,.12);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(112,98,255,.07),
+            transparent 58%
+        );
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+    position:relative;
+}
+
+.image-upload:hover{
+    border-color:rgba(126,112,255,.38);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(112,98,255,.12),
+            transparent 58%
+        );
+}
+
+.image-upload.has-image{
+    border-style:solid;
+    border-color:rgba(255,255,255,.09);
+}
+
+.image-upload input{
+    display:none;
+}
+
+.upload-placeholder{
+    text-align:center;
+    color:#60697b;
+}
+
+.upload-icon{
+    width:43px;
+    height:43px;
+
+    display:grid;
+    place-items:center;
+
+    margin:0 auto 10px;
+
+    border-radius:13px;
+
+    color:#858dff;
+
+    background:rgba(126,112,255,.08);
+}
+
+.upload-icon svg{
+    width:20px;
+    height:20px;
+}
+
+.upload-title{
+    color:#9da5b6;
+
+    font-size:11px;
+    font-weight:700;
+}
+
+.upload-sub{
+    margin-top:4px;
+
+    color:#596274;
+
+    font-size:9px;
+}
+
+.upload-preview{
+    width:100%;
+    height:100%;
+
+    max-height:250px;
+
+    display:none;
+
+    object-fit:contain;
+}
+
+/* video progress */
+
+.video-progress{
+    display:none;
+
+    margin-top:12px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    background:rgba(126,112,255,.055);
+
+    border:1px solid rgba(126,112,255,.12);
+}
+
+.video-progress.show{
+    display:block;
+}
+
+.progress-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    color:#9ca4b6;
+
+    font-size:10px;
+    font-weight:650;
+}
+
+.progress-status{
+    color:#8e82ff;
+}
+
+.progress-bar{
+    width:100%;
+    height:4px;
+
+    margin-top:9px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.06);
+}
+
+.progress-bar-inner{
+    width:12%;
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #786aff,
+            #23c9ed
+        );
+
+    transition:width .5s ease;
+}
+
+/* generated image to video */
+
+.use-for-video{
+    width:100%;
+
+    height:39px;
+
+    margin-top:9px;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    border-radius:10px;
+
+    color:#aeb5ff;
+
+    background:rgba(126,112,255,.06);
+
+    border:1px solid rgba(126,112,255,.12);
+
+    font-size:10px;
+    font-weight:700;
+}
+
+.use-for-video.show{
+    display:flex;
+}
+
+.use-for-video:hover{
+    background:rgba(126,112,255,.11);
+}
+
+.use-for-video svg{
+    width:14px;
+    height:14px;
+}
+
+/* cost note */
+
+.studio-note{
+    margin-top:10px;
+
+    color:#50596b;
+
+    font-size:9px;
+
+    line-height:1.5;
+
+    text-align:center;
 }
 
 /* =========================================
@@ -1244,6 +2146,7 @@ button{
 
     .sidebar{
         position:fixed;
+
         left:0;
         top:0;
         bottom:0;
@@ -1268,6 +2171,7 @@ button{
 
     .topbar{
         height:58px;
+
         padding:0 15px;
     }
 
@@ -1281,18 +2185,22 @@ button{
 
     .welcome{
         width:min(650px, calc(100% - 30px));
+
         padding:35px 0 135px;
     }
 
     .hero-mark{
         width:64px;
         height:64px;
+
         border-radius:20px;
+
         font-size:28px;
     }
 
     .hero-title{
         font-size:clamp(36px, 9vw, 52px);
+
         letter-spacing:-2.5px;
     }
 
@@ -1317,6 +2225,22 @@ button{
     .message{
         max-width:88%;
     }
+
+    .create-overlay{
+        padding:12px;
+    }
+
+    .create-studio{
+        max-height:94vh;
+    }
+
+    .create-grid{
+        grid-template-columns:1fr;
+    }
+
+    .create-result{
+        min-height:250px;
+    }
 }
 
 @media(max-width:560px){
@@ -1340,6 +2264,7 @@ button{
 
     .hero-description{
         margin-top:15px;
+
         font-size:12px;
         line-height:1.65;
     }
@@ -1357,6 +2282,7 @@ button{
     .suggestion-icon{
         width:27px;
         height:27px;
+
         margin-bottom:9px;
     }
 
@@ -1385,6 +2311,7 @@ button{
     .send-btn{
         width:40px;
         height:40px;
+
         border-radius:12px;
     }
 
@@ -1403,6 +2330,61 @@ button{
     .bubble{
         font-size:12.5px;
     }
+
+    .studio-header{
+        min-height:67px;
+        padding:12px 14px;
+    }
+
+    .studio-icon{
+        width:38px;
+        height:38px;
+    }
+
+    .studio-title{
+        font-size:14px;
+    }
+
+    .studio-tabs{
+        padding:8px 10px 0;
+    }
+
+    .studio-tab{
+        flex:1;
+        min-width:0;
+        height:38px;
+        padding:0 7px;
+        font-size:9px;
+    }
+
+    .studio-body{
+        padding:12px;
+    }
+
+    .studio-card{
+        padding:13px;
+    }
+
+    .option-grid{
+        grid-template-columns:1fr;
+    }
+
+    .create-prompt{
+        min-height:125px;
+    }
+
+    .create-result{
+        min-height:220px;
+    }
+
+    .generated-image,
+    .generated-video{
+        max-height:270px;
+    }
+
+    .create-studio-btn{
+        height:43px;
+    }
 }
 
 /* =========================================
@@ -1419,6 +2401,7 @@ button{
         transition-duration:.01ms !important;
     }
 }
+
 </style>
 </head>
 
@@ -1426,78 +2409,106 @@ button{
 
 <div class="app">
 
-    <!-- =====================================
-         SIDEBAR
-    ====================================== -->
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-    <aside class="sidebar" id="sidebar">
+<aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-inner">
+    <div class="sidebar-inner">
 
-            <div class="brand">
+        <div class="brand">
 
-                <div class="logo">K</div>
+            <div class="logo">K</div>
 
-                <div class="brand-text">
-                    <div class="brand-name">KULDEEP AI</div>
-                    <div class="brand-sub">Personal AI Assistant</div>
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    KULDEEP AI
+                </div>
+
+                <div class="brand-sub">
+                    Personal AI Assistant
                 </div>
 
             </div>
 
-
-            <button class="new-chat" id="newChatBtn">
-
-                <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M12 5v14"/>
-                    <path d="M5 12h14"/>
-                </svg>
-
-                New conversation
-
-            </button>
+        </div>
 
 
-            <div class="sidebar-section">
+        <button class="new-chat" id="newChatBtn">
 
-                <div class="section-title">
-                    Recent conversations
-                </div>
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <path d="M12 5v14"/>
+                <path d="M5 12h14"/>
+            </svg>
 
-                <div class="chat-list" id="chatList"></div>
+            New conversation
+
+        </button>
+
+
+        <!-- CREATE STUDIO BUTTON -->
+
+        <button class="create-studio-btn" id="openCreateBtn">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+
+                <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                <path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z"/>
+
+            </svg>
+
+            Create Studio
+
+        </button>
+
+
+        <div class="sidebar-section">
+
+            <div class="section-title">
+                Recent conversations
+            </div>
+
+            <div class="chat-list" id="chatList"></div>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="memory-pill">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    Conversation memory active
+                </span>
 
             </div>
 
 
-            <div class="sidebar-bottom">
+            <div class="profile">
 
-                <div class="memory-pill">
-
-                    <span class="status-dot"></span>
-
-                    <span>Conversation memory active</span>
-
+                <div class="profile-avatar">
+                    K
                 </div>
 
+                <div class="profile-info">
 
-                <div class="profile">
-
-                    <div class="profile-avatar">
-                        K
+                    <div class="profile-name">
+                        Kuldeep
                     </div>
 
-                    <div class="profile-info">
-
-                        <div class="profile-name">
-                            Kuldeep
-                        </div>
-
-                        <div class="profile-role">
-                            AI Workspace
-                        </div>
-
+                    <div class="profile-role">
+                        AI Workspace
                     </div>
 
                 </div>
@@ -1506,325 +2517,1030 @@ button{
 
         </div>
 
-    </aside>
+    </div>
+
+</aside>
 
 
-    <div class="overlay" id="overlay"></div>
+<div class="overlay" id="overlay"></div>
 
 
-    <!-- =====================================
-         MAIN
-    ====================================== -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-    <main class="main">
+<main class="main">
 
-        <header class="topbar">
+<header class="topbar">
 
-            <div class="top-left">
+    <div class="top-left">
 
-                <button class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu" id="mobileMenu">
 
-                    <svg viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2">
-                        <path d="M4 6h16"/>
-                        <path d="M4 12h16"/>
-                        <path d="M4 18h16"/>
-                    </svg>
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
 
-                </button>
+                <path d="M4 6h16"/>
+                <path d="M4 12h16"/>
+                <path d="M4 18h16"/>
 
-                <span class="top-logo"></span>
+            </svg>
 
-                <span class="top-title">
-                    KULDEEP AI
-                </span>
+        </button>
+
+
+        <span class="top-logo"></span>
+
+        <span class="top-title">
+            KULDEEP AI
+        </span>
+
+    </div>
+
+
+    <div class="top-right">
+
+        <div class="agent-label">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+
+                <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+
+            </svg>
+
+            AI Agent
+
+        </div>
+
+        <span>Online</span>
+
+    </div>
+
+</header>
+
+
+<section class="content">
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section class="welcome" id="welcome">
+
+    <div class="hero-mark">
+        K
+    </div>
+
+
+    <h1 class="hero-title">
+
+        Welcome to
+
+        <span class="gradient-text">
+            KULDEEP AI
+        </span>
+
+    </h1>
+
+
+    <p class="hero-description">
+
+        Your intelligent personal assistant for coding,
+        IT support, learning, research, productivity and
+        everyday questions.
+
+    </p>
+
+
+    <div class="suggestions">
+
+        <button
+            class="suggestion"
+            data-prompt="Help me troubleshoot a technical problem">
+
+            <div class="suggestion-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <rect x="3" y="4" width="18" height="13" rx="2"/>
+                    <path d="M8 21h8"/>
+                    <path d="M12 17v4"/>
+
+                </svg>
 
             </div>
 
+            <div class="suggestion-title">
+                IT Support
+            </div>
 
-            <div class="top-right">
+            <div class="suggestion-desc">
+                Troubleshoot technical problems
+            </div>
 
-                <div class="agent-label">
+        </button>
+
+
+        <button
+            class="suggestion"
+            data-prompt="Teach me Python from beginner level">
+
+            <div class="suggestion-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <path d="M12 3v18"/>
+                    <path d="M5 8l7-5 7 5"/>
+                    <path d="M5 16l7 5 7-5"/>
+
+                </svg>
+
+            </div>
+
+            <div class="suggestion-title">
+                Learn Python
+            </div>
+
+            <div class="suggestion-desc">
+                Build your coding skills
+            </div>
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            data-prompt="Help me build a modern professional website">
+
+            <div class="suggestion-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <rect x="3" y="4" width="18" height="15" rx="2"/>
+                    <path d="M3 8h18"/>
+                    <path d="M7 6h.01"/>
+                    <path d="M10 6h.01"/>
+
+                </svg>
+
+            </div>
+
+            <div class="suggestion-title">
+                Build Website
+            </div>
+
+            <div class="suggestion-desc">
+                Create and improve projects
+            </div>
+
+        </button>
+
+
+        <button
+            class="suggestion"
+            data-prompt="Explain DevOps and modern cloud technologies">
+
+            <div class="suggestion-icon">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8">
+
+                    <path d="M6 17a5 5 0 1 1 1.3-9.83A6 6 0 0 1 19 10a4 4 0 0 1-1 7H6z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="suggestion-title">
+                DevOps
+            </div>
+
+            <div class="suggestion-desc">
+                Learn modern cloud technologies
+            </div>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MESSAGES
+===================================================== -->
+
+<section class="messages" id="messages">
+
+    <div class="messages-inner" id="messagesInner">
+
+        <div class="typing" id="typing">
+
+            <div class="typing-avatar">
+                K
+            </div>
+
+            <div class="typing-dots">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCROLL BUTTON
+===================================================== -->
+
+<button class="scroll-bottom" id="scrollBottom">
+
+    <svg viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2">
+
+        <path d="M12 5v14"/>
+        <path d="M18 13l-6 6-6-6"/>
+
+    </svg>
+
+</button>
+
+
+<!-- =====================================================
+     COMPOSER
+===================================================== -->
+
+<div class="composer-area">
+
+    <div class="composer-wrap">
+
+        <div class="composer">
+
+            <div class="composer-tools">
+
+                <button
+                    class="tool-btn"
+                    id="composerCreateBtn"
+                    title="Create">
 
                     <svg viewBox="0 0 24 24"
                          fill="none"
                          stroke="currentColor"
                          stroke-width="1.8">
-                        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+
+                        <path d="M12 5v14"/>
+                        <path d="M5 12h14"/>
+
                     </svg>
 
-                    AI Agent
+                </button>
+
+            </div>
+
+
+            <textarea
+                id="prompt"
+                rows="1"
+                autocomplete="off"
+                placeholder="Message KULDEEP AI..."
+            ></textarea>
+
+
+            <button
+                class="send-btn"
+                id="sendBtn"
+                title="Send">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <path d="M22 2L11 13"/>
+                    <path d="M22 2l-7 20-4-9-9-4z"/>
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div class="disclaimer">
+            KULDEEP AI may make mistakes. Verify important information.
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<!-- =====================================================
+     CREATE STUDIO MODAL
+===================================================== -->
+
+<div class="create-overlay" id="createOverlay">
+
+    <section class="create-studio">
+
+        <header class="studio-header">
+
+            <div class="studio-heading">
+
+                <div class="studio-icon">
+
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.7">
+
+                        <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                        <path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z"/>
+
+                    </svg>
 
                 </div>
 
-                <span>Online</span>
+
+                <div>
+
+                    <div class="studio-title">
+                        Create Studio
+                    </div>
+
+                    <div class="studio-subtitle">
+                        Create images and bring them to life
+                    </div>
+
+                </div>
 
             </div>
+
+
+            <button
+                class="studio-close"
+                id="closeCreateBtn"
+                title="Close">
+
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+
+                    <path d="M6 6l12 12"/>
+                    <path d="M18 6L6 18"/>
+
+                </svg>
+
+            </button>
 
         </header>
 
 
-        <section class="content">
+        <!-- TABS -->
 
-            <!-- WELCOME -->
+        <div class="studio-tabs">
 
-            <section class="welcome" id="welcome">
+            <button
+                class="studio-tab active"
+                data-tab="image">
 
-                <div class="hero-mark">
-                    K
-                </div>
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.7">
 
-                <h1 class="hero-title">
-                    Welcome to
-                    <span class="gradient-text">
-                        KULDEEP AI
-                    </span>
-                </h1>
+                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                    <circle cx="8" cy="9" r="1.5"/>
+                    <path d="M3 16l5-5 4 4 3-3 6 6"/>
 
-                <p class="hero-description">
-                    Your intelligent personal assistant for coding,
-                    IT support, learning, research, productivity and
-                    everyday questions.
-                </p>
+                </svg>
+
+                Generate Image
+
+            </button>
 
 
-                <div class="suggestions">
+            <button
+                class="studio-tab"
+                data-tab="video">
 
-                    <button
-                        class="suggestion"
-                        data-prompt="Help me troubleshoot a technical problem">
+                <svg viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.7">
 
-                        <div class="suggestion-icon">
+                    <rect x="3" y="5" width="13" height="14" rx="2"/>
+                    <path d="M16 10l5-3v10l-5-3z"/>
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <rect x="3" y="4" width="18" height="13" rx="2"/>
-                                <path d="M8 21h8"/>
-                                <path d="M12 17v4"/>
-                            </svg>
+                </svg>
+
+                Image → Video
+
+            </button>
+
+        </div>
+
+
+        <div class="studio-body">
+
+            <!-- =================================================
+                 IMAGE PANEL
+            ================================================= -->
+
+            <div
+                class="studio-panel active"
+                id="imagePanel">
+
+                <div class="create-grid">
+
+                    <div>
+
+                        <div class="studio-card">
+
+                            <div class="studio-card-title">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                                </svg>
+
+                                Describe your image
+
+                            </div>
+
+
+                            <textarea
+                                class="create-prompt"
+                                id="imagePrompt"
+                                placeholder="Example: A cinematic futuristic Mumbai skyline at night, flying cars, rain reflections, ultra realistic, dramatic lighting..."
+                            ></textarea>
+
+
+                            <div class="option-grid">
+
+                                <div class="option-field">
+
+                                    <label class="option-label">
+                                        Aspect ratio
+                                    </label>
+
+                                    <select
+                                        class="create-select"
+                                        id="imageAspect">
+
+                                        <option value="1:1">
+                                            1:1 — Square
+                                        </option>
+
+                                        <option value="16:9">
+                                            16:9 — Landscape
+                                        </option>
+
+                                        <option value="9:16">
+                                            9:16 — Portrait
+                                        </option>
+
+                                        <option value="4:3">
+                                            4:3
+                                        </option>
+
+                                        <option value="3:4">
+                                            3:4
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="option-field">
+
+                                    <label class="option-label">
+                                        Quality
+                                    </label>
+
+                                    <select
+                                        class="create-select"
+                                        id="imageSize">
+
+                                        <option value="1K">
+                                            1K — Faster
+                                        </option>
+
+                                        <option value="2K">
+                                            2K — Higher detail
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="generate-btn"
+                                id="generateImageBtn">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                                </svg>
+
+                                Generate Image
+
+                            </button>
 
                         </div>
 
-                        <div class="suggestion-title">
-                            IT Support
-                        </div>
-
-                        <div class="suggestion-desc">
-                            Troubleshoot technical problems
-                        </div>
-
-                    </button>
+                    </div>
 
 
-                    <button
-                        class="suggestion"
-                        data-prompt="Teach me Python from beginner level">
+                    <div>
 
-                        <div class="suggestion-icon">
+                        <div class="studio-card">
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <path d="M12 3v18"/>
-                                <path d="M5 8l7-5 7 5"/>
-                                <path d="M5 16l7 5 7-5"/>
-                            </svg>
+                            <div class="studio-card-title">
 
-                        </div>
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
 
-                        <div class="suggestion-title">
-                            Learn Python
-                        </div>
+                                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                    <circle cx="8" cy="9" r="1.5"/>
+                                    <path d="M3 16l5-5 4 4 3-3 6 6"/>
 
-                        <div class="suggestion-desc">
-                            Build your coding skills
-                        </div>
+                                </svg>
 
-                    </button>
+                                Result
+
+                            </div>
 
 
-                    <button
-                        class="suggestion"
-                        data-prompt="Help me build a modern professional website">
+                            <div class="create-result">
 
-                        <div class="suggestion-icon">
+                                <div
+                                    class="result-empty"
+                                    id="imageEmpty">
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <rect x="3" y="4" width="18" height="15" rx="2"/>
-                                <path d="M3 8h18"/>
-                                <path d="M7 6h.01"/>
-                                <path d="M10 6h.01"/>
-                            </svg>
+                                    <div class="result-empty-icon">
 
-                        </div>
+                                        <svg viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.7">
 
-                        <div class="suggestion-title">
-                            Build Website
-                        </div>
+                                            <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                            <circle cx="8" cy="9" r="1.5"/>
+                                            <path d="M3 16l5-5 4 4 3-3 6 6"/>
 
-                        <div class="suggestion-desc">
-                            Create and improve projects
-                        </div>
+                                        </svg>
 
-                    </button>
+                                    </div>
 
+                                    <div class="result-empty-title">
+                                        Your creation appears here
+                                    </div>
 
-                    <button
-                        class="suggestion"
-                        data-prompt="Explain DevOps and modern cloud technologies">
+                                    <div class="result-empty-text">
+                                        Describe what you want to create and KULDEEP AI will generate it.
+                                    </div>
 
-                        <div class="suggestion-icon">
-
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="1.8">
-                                <path d="M6 17a5 5 0 1 1 1.3-9.83A6 6 0 0 1 19 10a4 4 0 0 1-1 7H6z"/>
-                            </svg>
-
-                        </div>
-
-                        <div class="suggestion-title">
-                            DevOps
-                        </div>
-
-                        <div class="suggestion-desc">
-                            Learn modern cloud technologies
-                        </div>
-
-                    </button>
-
-                </div>
-
-            </section>
+                                </div>
 
 
-            <!-- MESSAGES -->
+                                <img
+                                    class="generated-image"
+                                    id="generatedImage"
+                                    alt="Generated image">
 
-            <section class="messages" id="messages">
+                            </div>
 
-                <div class="messages-inner" id="messagesInner">
 
-                    <div class="typing" id="typing">
+                            <div
+                                class="result-actions"
+                                id="imageResultActions">
 
-                        <div class="typing-avatar">
-                            K
-                        </div>
+                                <button
+                                    class="result-action primary"
+                                    id="downloadImageBtn">
 
-                        <div class="typing-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                                    <svg viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="1.8">
+
+                                        <path d="M12 3v12"/>
+                                        <path d="M7 10l5 5 5-5"/>
+                                        <path d="M5 21h14"/>
+
+                                    </svg>
+
+                                    Download
+
+                                </button>
+
+
+                                <button
+                                    class="result-action"
+                                    id="imageToVideoBtn">
+
+                                    <svg viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="1.8">
+
+                                        <rect x="3" y="5" width="13" height="14" rx="2"/>
+                                        <path d="M16 10l5-3v10l-5-3z"/>
+
+                                    </svg>
+
+                                    Make Video
+
+                                </button>
+
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
 
-            </section>
+
+                <div class="studio-note">
+                    Image generation uses your Gemini API configuration. Usage limits and billing may apply.
+                </div>
+
+            </div>
 
 
-            <!-- SCROLL BUTTON -->
+            <!-- =================================================
+                 VIDEO PANEL
+            ================================================= -->
 
-            <button class="scroll-bottom" id="scrollBottom">
+            <div
+                class="studio-panel"
+                id="videoPanel">
 
-                <svg viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path d="M12 5v14"/>
-                    <path d="M18 13l-6 6-6-6"/>
-                </svg>
+                <div class="create-grid">
 
-            </button>
+                    <div>
 
+                        <div class="studio-card">
 
-            <!-- COMPOSER -->
-
-            <div class="composer-area">
-
-                <div class="composer-wrap">
-
-                    <div class="composer">
-
-                        <div class="composer-tools">
-
-                            <button
-                                class="tool-btn"
-                                title="Add">
+                            <div class="studio-card-title">
 
                                 <svg viewBox="0 0 24 24"
                                      fill="none"
                                      stroke="currentColor"
                                      stroke-width="1.8">
-                                    <path d="M12 5v14"/>
-                                    <path d="M5 12h14"/>
+
+                                    <path d="M4 5h16v14H4z"/>
+                                    <path d="M8 5v14"/>
+                                    <path d="M16 5v14"/>
+
                                 </svg>
+
+                                Starting image
+
+                            </div>
+
+
+                            <label
+                                class="image-upload"
+                                id="imageUploadArea">
+
+                                <input
+                                    type="file"
+                                    id="videoImageInput"
+                                    accept="image/png,image/jpeg,image/webp">
+
+
+                                <div
+                                    class="upload-placeholder"
+                                    id="uploadPlaceholder">
+
+                                    <div class="upload-icon">
+
+                                        <svg viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.8">
+
+                                            <path d="M12 16V4"/>
+                                            <path d="M7 9l5-5 5 5"/>
+                                            <path d="M5 20h14"/>
+
+                                        </svg>
+
+                                    </div>
+
+                                    <div class="upload-title">
+                                        Upload an image
+                                    </div>
+
+                                    <div class="upload-sub">
+                                        PNG, JPG or WebP
+                                    </div>
+
+                                </div>
+
+
+                                <img
+                                    class="upload-preview"
+                                    id="videoImagePreview"
+                                    alt="Video source">
+
+                            </label>
+
+
+                            <button
+                                class="use-for-video"
+                                id="useGeneratedForVideo">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                                </svg>
+
+                                Use generated image
 
                             </button>
 
                         </div>
 
 
-                        <textarea
-                            id="prompt"
-                            rows="1"
-                            autocomplete="off"
-                            placeholder="Message KULDEEP AI..."
-                        ></textarea>
+                        <div class="studio-card" style="margin-top:12px;">
+
+                            <div class="studio-card-title">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                                </svg>
+
+                                Motion prompt
+
+                            </div>
 
 
-                        <button
-                            class="send-btn"
-                            id="sendBtn"
-                            title="Send">
+                            <textarea
+                                class="create-prompt"
+                                id="videoPrompt"
+                                style="min-height:115px;"
+                                placeholder="Example: Slowly move the camera forward while rain falls, neon lights flicker and the flying cars pass through the scene..."
+                            ></textarea>
 
-                            <svg viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
-                                 stroke-width="2"
-                                 stroke-linecap="round"
-                                 stroke-linejoin="round">
-                                <path d="M22 2L11 13"/>
-                                <path d="M22 2l-7 20-4-9-9-4z"/>
-                            </svg>
 
-                        </button>
+                            <div class="option-grid">
+
+                                <div class="option-field">
+
+                                    <label class="option-label">
+                                        Aspect ratio
+                                    </label>
+
+                                    <select
+                                        class="create-select"
+                                        id="videoAspect">
+
+                                        <option value="16:9">
+                                            16:9 — Landscape
+                                        </option>
+
+                                        <option value="9:16">
+                                            9:16 — Portrait
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="generate-btn"
+                                id="generateVideoBtn">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+                                </svg>
+
+                                Generate Video
+
+                            </button>
+
+
+                            <div
+                                class="video-progress"
+                                id="videoProgress">
+
+                                <div class="progress-top">
+
+                                    <span>
+                                        Creating your video...
+                                    </span>
+
+                                    <span
+                                        class="progress-status"
+                                        id="videoProgressStatus">
+                                        Starting
+                                    </span>
+
+                                </div>
+
+                                <div class="progress-bar">
+
+                                    <div
+                                        class="progress-bar-inner"
+                                        id="videoProgressBar">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="disclaimer">
-                        KULDEEP AI may make mistakes. Verify important information.
+                    <div>
+
+                        <div class="studio-card">
+
+                            <div class="studio-card-title">
+
+                                <svg viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <rect x="3" y="5" width="13" height="14" rx="2"/>
+                                    <path d="M16 10l5-3v10l-5-3z"/>
+
+                                </svg>
+
+                                Video Result
+
+                            </div>
+
+
+                            <div class="create-result">
+
+                                <div
+                                    class="result-empty"
+                                    id="videoEmpty">
+
+                                    <div class="result-empty-icon">
+
+                                        <svg viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.7">
+
+                                            <rect x="3" y="5" width="13" height="14" rx="2"/>
+                                            <path d="M16 10l5-3v10l-5-3z"/>
+
+                                        </svg>
+
+                                    </div>
+
+                                    <div class="result-empty-title">
+                                        Your video appears here
+                                    </div>
+
+                                    <div class="result-empty-text">
+                                        Upload an image, describe the motion and generate your video.
+                                    </div>
+
+                                </div>
+
+
+                                <video
+                                    class="generated-video"
+                                    id="generatedVideo"
+                                    controls
+                                    playsinline>
+                                </video>
+
+                            </div>
+
+
+                            <div
+                                class="result-actions"
+                                id="videoResultActions">
+
+                                <button
+                                    class="result-action primary"
+                                    id="downloadVideoBtn">
+
+                                    <svg viewBox="0 0 24 24"
+                                         fill="none"
+                                         stroke="currentColor"
+                                         stroke-width="1.8">
+
+                                        <path d="M12 3v12"/>
+                                        <path d="M7 10l5 5 5-5"/>
+                                        <path d="M5 21h14"/>
+
+                                    </svg>
+
+                                    Download Video
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
 
+
+                <div class="studio-note">
+                    Video generation can take some time. Veo usage limits and billing may apply.
+                </div>
+
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
 
 </div>
 
 
 <script>
 
-/* =========================================
-   STATE
-========================================= */
+/* =========================================================
+   CHAT STATE
+========================================================= */
 
-const STORAGE_KEY = "kuldeep_ai_conversations_v3";
-const CURRENT_KEY = "kuldeep_ai_current_v3";
+const STORAGE_KEY =
+    "kuldeep_ai_conversations_v3";
+
+const CURRENT_KEY =
+    "kuldeep_ai_current_v3";
 
 let conversationMessages = [];
 
@@ -1835,38 +3551,57 @@ let currentChatId = null;
 let isLoading = false;
 
 
-/* =========================================
+/* =========================================================
    ELEMENTS
-========================================= */
+========================================================= */
 
-const promptInput = document.getElementById("prompt");
-const sendBtn = document.getElementById("sendBtn");
+const promptInput =
+    document.getElementById("prompt");
 
-const welcome = document.getElementById("welcome");
-const messagesBox = document.getElementById("messages");
-const messagesInner = document.getElementById("messagesInner");
+const sendBtn =
+    document.getElementById("sendBtn");
 
-const typing = document.getElementById("typing");
+const welcome =
+    document.getElementById("welcome");
 
-const chatList = document.getElementById("chatList");
+const messagesBox =
+    document.getElementById("messages");
 
-const newChatBtn = document.getElementById("newChatBtn");
+const messagesInner =
+    document.getElementById("messagesInner");
 
-const mobileMenu = document.getElementById("mobileMenu");
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
+const typing =
+    document.getElementById("typing");
 
-const scrollBottom = document.getElementById("scrollBottom");
+const chatList =
+    document.getElementById("chatList");
+
+const newChatBtn =
+    document.getElementById("newChatBtn");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const sidebar =
+    document.getElementById("sidebar");
+
+const overlay =
+    document.getElementById("overlay");
+
+const scrollBottom =
+    document.getElementById("scrollBottom");
 
 
-/* =========================================
+/* =========================================================
    SYSTEM PROMPT
-========================================= */
+========================================================= */
 
 const SYSTEM_MESSAGE = {
+
     role:"system",
+
     content:
-        `You are KULDEEP AI, a helpful personal AI assistant.
+`You are KULDEEP AI, a helpful personal AI assistant.
 
 You can communicate in Hindi, English, or Hinglish.
 
@@ -1879,12 +3614,13 @@ Rules:
 - Use clean formatting when helpful.
 - Do not pretend to have capabilities you do not have.
 - Keep answers useful and reasonably concise.`
+
 };
 
 
-/* =========================================
+/* =========================================================
    STORAGE
-========================================= */
+========================================================= */
 
 function loadStorage(){
 
@@ -1892,11 +3628,15 @@ function loadStorage(){
 
         const saved =
             JSON.parse(
-                localStorage.getItem(STORAGE_KEY)
+                localStorage.getItem(
+                    STORAGE_KEY
+                )
             );
 
         if(Array.isArray(saved)){
+
             chatHistory = saved;
+
         }
 
     }catch(error){
@@ -1928,9 +3668,9 @@ function saveStorage(){
 }
 
 
-/* =========================================
+/* =========================================================
    CHAT ID
-========================================= */
+========================================================= */
 
 function createId(){
 
@@ -1942,19 +3682,22 @@ function createId(){
 }
 
 
-/* =========================================
+/* =========================================================
    NEW CHAT
-========================================= */
+========================================================= */
 
 function resetConversation(){
 
-    currentChatId = createId();
+    currentChatId =
+        createId();
 
     conversationMessages = [
         {...SYSTEM_MESSAGE}
     ];
 
-    localStorage.removeItem(CURRENT_KEY);
+    localStorage.removeItem(
+        CURRENT_KEY
+    );
 
     renderEmptyState();
 
@@ -1965,39 +3708,49 @@ function resetConversation(){
 }
 
 
-/* =========================================
+/* =========================================================
    EMPTY STATE
-========================================= */
+========================================================= */
 
 function renderEmptyState(){
 
-    welcome.style.display = "block";
+    welcome.style.display =
+        "block";
 
-    messagesBox.classList.remove("active");
+    messagesBox.classList.remove(
+        "active"
+    );
 
     messagesInner
-        .querySelectorAll(".message-row")
-        .forEach(el => el.remove());
+        .querySelectorAll(
+            ".message-row"
+        )
+        .forEach(
+            el => el.remove()
+        );
 
 }
 
 
-/* =========================================
+/* =========================================================
    CHAT MODE
-========================================= */
+========================================================= */
 
 function openChatMode(){
 
-    welcome.style.display = "none";
+    welcome.style.display =
+        "none";
 
-    messagesBox.classList.add("active");
+    messagesBox.classList.add(
+        "active"
+    );
 
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
+/* =========================================================
+   ESCAPE
+========================================================= */
 
 function escapeHtml(text){
 
@@ -2011,9 +3764,9 @@ function escapeHtml(text){
 }
 
 
-/* =========================================
-   FORMAT TIME
-========================================= */
+/* =========================================================
+   TIME
+========================================================= */
 
 function getTime(){
 
@@ -2029,33 +3782,52 @@ function getTime(){
 }
 
 
-/* =========================================
+/* =========================================================
    ADD MESSAGE
-========================================= */
+========================================================= */
 
-function addMessage(role, text, time = getTime()){
+function addMessage(
+    role,
+    text,
+    time = getTime()
+){
 
     openChatMode();
 
-    const row = document.createElement("div");
+    const row =
+        document.createElement(
+            "div"
+        );
 
     row.className =
         "message-row " +
-        (role === "user" ? "user" : "assistant");
+        (
+            role === "user"
+            ? "user"
+            : "assistant"
+        );
 
-    const message = document.createElement("div");
 
-    message.className = "message";
+    const message =
+        document.createElement(
+            "div"
+        );
+
+    message.className =
+        "message";
+
 
     const roleLabel =
         role === "user"
         ? "You"
         : "KULDEEP AI";
 
+
     const avatar =
         role === "user"
         ? ""
         : `<span class="mini-avatar">K</span>`;
+
 
     message.innerHTML = `
 
@@ -2085,11 +3857,18 @@ function addMessage(role, text, time = getTime()){
                          fill="none"
                          stroke="currentColor"
                          stroke-width="1.8">
-                        <rect x="9" y="9" width="11" height="11" rx="2"/>
+
+                        <rect x="9" y="9"
+                              width="11"
+                              height="11"
+                              rx="2"/>
+
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+
                     </svg>
 
                 </button>
+
 
                 <button
                     class="action-btn regenerate-btn"
@@ -2099,10 +3878,12 @@ function addMessage(role, text, time = getTime()){
                          fill="none"
                          stroke="currentColor"
                          stroke-width="1.8">
+
                         <path d="M20 11a8.1 8.1 0 0 0-15.5-2"/>
                         <path d="M4 5v4h4"/>
                         <path d="M4 13a8.1 8.1 0 0 0 15.5 2"/>
                         <path d="M20 19v-4h-4"/>
+
                     </svg>
 
                 </button>
@@ -2114,15 +3895,21 @@ function addMessage(role, text, time = getTime()){
 
     `;
 
+
     row.appendChild(message);
+
 
     messagesInner.insertBefore(
         row,
         typing
     );
 
+
     const copyButton =
-        row.querySelector(".copy-btn");
+        row.querySelector(
+            ".copy-btn"
+        );
+
 
     if(copyButton){
 
@@ -2132,14 +3919,20 @@ function addMessage(role, text, time = getTime()){
 
                 try{
 
-                    await navigator.clipboard.writeText(text);
+                    await navigator
+                        .clipboard
+                        .writeText(text);
 
                     copyButton.style.color =
                         "#49e88b";
 
-                    setTimeout(() => {
-                        copyButton.style.color = "";
-                    },1200);
+                    setTimeout(
+                        () => {
+                            copyButton.style.color =
+                                "";
+                        },
+                        1200
+                    );
 
                 }catch(error){
 
@@ -2154,8 +3947,12 @@ function addMessage(role, text, time = getTime()){
 
     }
 
+
     const regenerateButton =
-        row.querySelector(".regenerate-btn");
+        row.querySelector(
+            ".regenerate-btn"
+        );
+
 
     if(regenerateButton){
 
@@ -2166,27 +3963,35 @@ function addMessage(role, text, time = getTime()){
 
     }
 
+
     scrollToBottom();
 
 }
 
 
-/* =========================================
+/* =========================================================
    SEND MESSAGE
-========================================= */
+========================================================= */
 
 async function sendMessage(){
 
     if(isLoading){
+
         return;
+
     }
+
 
     const text =
         promptInput.value.trim();
 
+
     if(!text){
+
         return;
+
     }
+
 
     if(
         conversationMessages.length === 0 ||
@@ -2201,8 +4006,11 @@ async function sendMessage(){
 
 
     const userMessage = {
+
         role:"user",
+
         content:text
+
     };
 
 
@@ -2275,12 +4083,16 @@ async function sendMessage(){
 
 
         conversationMessages.push({
+
             role:"assistant",
+
             content:reply
+
         });
 
 
         hideTyping();
+
 
         addMessage(
             "assistant",
@@ -2295,14 +4107,12 @@ async function sendMessage(){
 
         hideTyping();
 
-        const errorMessage =
-            "Sorry, kuch problem aa gayi. " +
-            "Please try again.";
 
         addMessage(
             "assistant",
-            errorMessage
+            "Sorry, kuch problem aa gayi. Please try again."
         );
+
 
         console.error(error);
 
@@ -2315,26 +4125,29 @@ async function sendMessage(){
 }
 
 
-/* =========================================
+/* =========================================================
    LOADING
-========================================= */
+========================================================= */
 
 function setLoading(value){
 
     isLoading = value;
 
-    sendBtn.disabled = value;
+    sendBtn.disabled =
+        value;
 
 }
 
 
-/* =========================================
+/* =========================================================
    TYPING
-========================================= */
+========================================================= */
 
 function showTyping(){
 
-    typing.classList.add("show");
+    typing.classList.add(
+        "show"
+    );
 
     scrollToBottom();
 
@@ -2343,49 +4156,63 @@ function showTyping(){
 
 function hideTyping(){
 
-    typing.classList.remove("show");
+    typing.classList.remove(
+        "show"
+    );
 
 }
 
 
-/* =========================================
+/* =========================================================
    SCROLL
-========================================= */
+========================================================= */
 
 function scrollToBottom(){
 
-    requestAnimationFrame(() => {
+    requestAnimationFrame(
+        () => {
 
-        messagesBox.scrollTo({
-            top:messagesBox.scrollHeight,
-            behavior:"smooth"
-        });
+            messagesBox.scrollTo({
 
-    });
+                top:
+                    messagesBox.scrollHeight,
+
+                behavior:
+                    "smooth"
+
+            });
+
+        }
+    );
 
 }
 
 
-/* =========================================
+/* =========================================================
    SAVE CURRENT CHAT
-========================================= */
+========================================================= */
 
 function saveCurrentConversation(){
 
     const realMessages =
         conversationMessages
             .filter(
-                msg => msg.role !== "system"
+                msg =>
+                    msg.role !== "system"
             );
 
+
     if(realMessages.length === 0){
+
         return;
+
     }
 
 
     const firstUser =
         realMessages.find(
-            msg => msg.role === "user"
+            msg =>
+                msg.role === "user"
         );
 
 
@@ -2403,59 +4230,77 @@ function saveCurrentConversation(){
 
     const chat = {
 
-        id:currentChatId,
+        id:
+            currentChatId,
 
-        title:title
-            .replace(/\s+/g," ")
-            .slice(0,55),
+        title:
+            title
+                .replace(/\s+/g," ")
+                .slice(0,55),
 
-        messages:realMessages,
+        messages:
+            realMessages,
 
-        updatedAt:Date.now()
+        updatedAt:
+            Date.now()
 
     };
 
 
     if(existingIndex >= 0){
 
-        chatHistory[existingIndex] =
-            chat;
+        chatHistory[
+            existingIndex
+        ] = chat;
 
     }else{
 
-        chatHistory.unshift(chat);
+        chatHistory.unshift(
+            chat
+        );
 
     }
 
 
     chatHistory.sort(
         (a,b) =>
-            b.updatedAt - a.updatedAt
+            b.updatedAt -
+            a.updatedAt
     );
 
 
     chatHistory =
-        chatHistory.slice(0,30);
+        chatHistory.slice(
+            0,
+            30
+        );
 
 
     saveStorage();
 
+
     renderChatList();
+
 
     localStorage.setItem(
         CURRENT_KEY,
         JSON.stringify({
-            id:currentChatId,
-            messages:conversationMessages
+
+            id:
+                currentChatId,
+
+            messages:
+                conversationMessages
+
         })
     );
 
 }
 
 
-/* =========================================
-   RENDER CHAT LIST
-========================================= */
+/* =========================================================
+   CHAT LIST
+========================================================= */
 
 function renderChatList(){
 
@@ -2465,7 +4310,9 @@ function renderChatList(){
     if(chatHistory.length === 0){
 
         const empty =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         empty.style.cssText = `
             padding:15px 8px;
@@ -2476,79 +4323,102 @@ function renderChatList(){
         empty.textContent =
             "Your conversations will appear here.";
 
-        chatList.appendChild(empty);
+        chatList.appendChild(
+            empty
+        );
 
         return;
 
     }
 
 
-    chatHistory.forEach(chat => {
+    chatHistory.forEach(
+        chat => {
 
-        const button =
-            document.createElement("button");
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-        button.className =
-            "chat-item" +
-            (
-                chat.id === currentChatId
-                ? " active"
-                : ""
+
+            button.className =
+                "chat-item" +
+                (
+                    chat.id ===
+                    currentChatId
+                    ? " active"
+                    : ""
+                );
+
+
+            button.textContent =
+                chat.title;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    loadChat(
+                        chat.id
+                    );
+
+                    closeMobileSidebar();
+
+                }
             );
 
-        button.textContent =
-            chat.title;
 
+            chatList.appendChild(
+                button
+            );
 
-        button.addEventListener(
-            "click",
-            () => {
-
-                loadChat(chat.id);
-
-                closeMobileSidebar();
-
-            }
-        );
-
-
-        chatList.appendChild(button);
-
-    });
+        }
+    );
 
 }
 
 
-/* =========================================
+/* =========================================================
    LOAD CHAT
-========================================= */
+========================================================= */
 
 function loadChat(id){
 
     const chat =
         chatHistory.find(
-            item => item.id === id
+            item =>
+                item.id === id
         );
 
 
     if(!chat){
+
         return;
+
     }
 
 
-    currentChatId = chat.id;
+    currentChatId =
+        chat.id;
 
 
     conversationMessages = [
+
         {...SYSTEM_MESSAGE},
+
         ...chat.messages
+
     ];
 
 
     messagesInner
-        .querySelectorAll(".message-row")
+        .querySelectorAll(
+            ".message-row"
+        )
         .forEach(
-            el => el.remove()
+            el =>
+                el.remove()
         );
 
 
@@ -2569,30 +4439,40 @@ function loadChat(id){
 
     renderChatList();
 
+
     saveCurrentConversation();
 
 }
 
 
-/* =========================================
+/* =========================================================
    REGENERATE
-========================================= */
+========================================================= */
 
 async function regenerateLastResponse(){
 
     if(isLoading){
+
         return;
+
     }
 
 
     const lastAssistantIndex =
         conversationMessages
-            .map(m => m.role)
-            .lastIndexOf("assistant");
+            .map(
+                m =>
+                    m.role
+            )
+            .lastIndexOf(
+                "assistant"
+            );
 
 
     if(lastAssistantIndex === -1){
+
         return;
+
     }
 
 
@@ -2604,15 +4484,16 @@ async function regenerateLastResponse(){
 
 
     messagesInner
-        .querySelectorAll(".message-row")
+        .querySelectorAll(
+            ".message-row"
+        )
         .forEach(
             row => {
 
-                const bubble =
-                    row.querySelector(".bubble");
-
                 if(
-                    row.classList.contains("assistant")
+                    row.classList.contains(
+                        "assistant"
+                    )
                 ){
 
                     row.remove();
@@ -2642,9 +4523,12 @@ async function regenerateLastResponse(){
                     },
 
                     body:JSON.stringify({
+
                         messages:
                             conversationMessages
+
                     })
+
                 }
             );
 
@@ -2677,12 +4561,16 @@ async function regenerateLastResponse(){
 
 
         conversationMessages.push({
+
             role:"assistant",
+
             content:reply
+
         });
 
 
         hideTyping();
+
 
         addMessage(
             "assistant",
@@ -2697,10 +4585,12 @@ async function regenerateLastResponse(){
 
         hideTyping();
 
+
         addMessage(
             "assistant",
             "Sorry, response regenerate nahi ho saka."
         );
+
 
         console.error(error);
 
@@ -2713,14 +4603,15 @@ async function regenerateLastResponse(){
 }
 
 
-/* =========================================
+/* =========================================================
    TEXTAREA
-========================================= */
+========================================================= */
 
 function autoResize(){
 
     promptInput.style.height =
         "auto";
+
 
     promptInput.style.height =
         Math.min(
@@ -2756,19 +4647,15 @@ promptInput.addEventListener(
 );
 
 
-/* =========================================
-   SEND BUTTON
-========================================= */
-
 sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
 
-/* =========================================
+/* =========================================================
    NEW CHAT
-========================================= */
+========================================================= */
 
 newChatBtn.addEventListener(
     "click",
@@ -2782,47 +4669,61 @@ newChatBtn.addEventListener(
 );
 
 
-/* =========================================
+/* =========================================================
    SUGGESTIONS
-========================================= */
+========================================================= */
 
 document
-    .querySelectorAll(".suggestion")
-    .forEach(button => {
+    .querySelectorAll(
+        ".suggestion"
+    )
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                promptInput.value =
-                    button.dataset.prompt;
+                    promptInput.value =
+                        button.dataset.prompt;
 
-                autoResize();
+                    autoResize();
 
-                promptInput.focus();
+                    promptInput.focus();
 
-            }
-        );
+                }
+            );
 
-    });
+        }
+    );
 
 
-/* =========================================
+/* =========================================================
    MOBILE SIDEBAR
-========================================= */
+========================================================= */
 
 function openMobileSidebar(){
 
-    sidebar.classList.add("open");
-    overlay.classList.add("open");
+    sidebar.classList.add(
+        "open"
+    );
+
+    overlay.classList.add(
+        "open"
+    );
 
 }
 
 
 function closeMobileSidebar(){
 
-    sidebar.classList.remove("open");
-    overlay.classList.remove("open");
+    sidebar.classList.remove(
+        "open"
+    );
+
+    overlay.classList.remove(
+        "open"
+    );
 
 }
 
@@ -2839,9 +4740,9 @@ overlay.addEventListener(
 );
 
 
-/* =========================================
+/* =========================================================
    SCROLL BUTTON
-========================================= */
+========================================================= */
 
 messagesBox.addEventListener(
     "scroll",
@@ -2877,9 +4778,9 @@ scrollBottom.addEventListener(
 );
 
 
-/* =========================================
+/* =========================================================
    RESTORE CURRENT CHAT
-========================================= */
+========================================================= */
 
 function restoreCurrentChat(){
 
@@ -2895,7 +4796,9 @@ function restoreCurrentChat(){
 
         if(
             saved &&
-            Array.isArray(saved.messages) &&
+            Array.isArray(
+                saved.messages
+            ) &&
             saved.messages.length > 1
         ){
 
@@ -2911,13 +4814,15 @@ function restoreCurrentChat(){
             const realMessages =
                 conversationMessages
                     .filter(
-                        m => m.role !== "system"
+                        m =>
+                            m.role !== "system"
                     );
 
 
             if(realMessages.length){
 
                 openChatMode();
+
 
                 realMessages.forEach(
                     message => {
@@ -2929,6 +4834,7 @@ function restoreCurrentChat(){
 
                     }
                 );
+
 
                 return;
 
@@ -2950,9 +4856,1223 @@ function restoreCurrentChat(){
 }
 
 
-/* =========================================
+/* =========================================================
+   CREATE STUDIO
+========================================================= */
+
+const createOverlay =
+    document.getElementById(
+        "createOverlay"
+    );
+
+const openCreateBtn =
+    document.getElementById(
+        "openCreateBtn"
+    );
+
+const composerCreateBtn =
+    document.getElementById(
+        "composerCreateBtn"
+    );
+
+const closeCreateBtn =
+    document.getElementById(
+        "closeCreateBtn"
+    );
+
+
+function openCreateStudio(){
+
+    createOverlay.classList.add(
+        "open"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+function closeCreateStudio(){
+
+    createOverlay.classList.remove(
+        "open"
+    );
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+openCreateBtn.addEventListener(
+    "click",
+    () => {
+
+        openCreateStudio();
+
+        closeMobileSidebar();
+
+    }
+);
+
+
+composerCreateBtn.addEventListener(
+    "click",
+    openCreateStudio
+);
+
+
+closeCreateBtn.addEventListener(
+    "click",
+    closeCreateStudio
+);
+
+
+createOverlay.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target ===
+            createOverlay
+        ){
+
+            closeCreateStudio();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Escape" &&
+            createOverlay.classList.contains(
+                "open"
+            )
+        ){
+
+            closeCreateStudio();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CREATE TABS
+========================================================= */
+
+const studioTabs =
+    document.querySelectorAll(
+        ".studio-tab"
+    );
+
+const imagePanel =
+    document.getElementById(
+        "imagePanel"
+    );
+
+const videoPanel =
+    document.getElementById(
+        "videoPanel"
+    );
+
+
+studioTabs.forEach(
+    tab => {
+
+        tab.addEventListener(
+            "click",
+            () => {
+
+                studioTabs.forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+
+                tab.classList.add(
+                    "active"
+                );
+
+
+                const target =
+                    tab.dataset.tab;
+
+
+                if(target === "image"){
+
+                    imagePanel.classList.add(
+                        "active"
+                    );
+
+                    videoPanel.classList.remove(
+                        "active"
+                    );
+
+                }else{
+
+                    videoPanel.classList.add(
+                        "active"
+                    );
+
+                    imagePanel.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   IMAGE GENERATION
+========================================================= */
+
+const imagePrompt =
+    document.getElementById(
+        "imagePrompt"
+    );
+
+const imageAspect =
+    document.getElementById(
+        "imageAspect"
+    );
+
+const imageSize =
+    document.getElementById(
+        "imageSize"
+    );
+
+const generateImageBtn =
+    document.getElementById(
+        "generateImageBtn"
+    );
+
+const generatedImage =
+    document.getElementById(
+        "generatedImage"
+    );
+
+const imageEmpty =
+    document.getElementById(
+        "imageEmpty"
+    );
+
+const imageResultActions =
+    document.getElementById(
+        "imageResultActions"
+    );
+
+const downloadImageBtn =
+    document.getElementById(
+        "downloadImageBtn"
+    );
+
+const imageToVideoBtn =
+    document.getElementById(
+        "imageToVideoBtn"
+    );
+
+
+let generatedImageData =
+    null;
+
+
+generateImageBtn.addEventListener(
+    "click",
+    generateImage
+);
+
+
+async function generateImage(){
+
+    const prompt =
+        imagePrompt.value.trim();
+
+
+    if(!prompt){
+
+        imagePrompt.focus();
+
+        return;
+
+    }
+
+
+    generateImageBtn.disabled =
+        true;
+
+
+    generateImageBtn.innerHTML = `
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8">
+
+            <path d="M12 3v4"/>
+            <path d="M12 17v4"/>
+            <path d="M3 12h4"/>
+            <path d="M17 12h4"/>
+
+        </svg>
+
+        Creating...
+
+    `;
+
+
+    imageResultActions.classList.remove(
+        "show"
+    );
+
+
+    imageEmpty.style.display =
+        "block";
+
+
+    generatedImage.style.display =
+        "none";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/generate-image",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        prompt:
+                            prompt,
+
+                        aspectRatio:
+                            imageAspect.value,
+
+                        imageSize:
+                            imageSize.value
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data?.error ||
+                "Image generation failed."
+            );
+
+        }
+
+
+        if(
+            !data?.imageDataUrl
+        ){
+
+            throw new Error(
+                "No image was returned."
+            );
+
+        }
+
+
+        generatedImageData =
+            data.imageDataUrl;
+
+
+        generatedImage.src =
+            generatedImageData;
+
+
+        generatedImage.style.display =
+            "block";
+
+
+        imageEmpty.style.display =
+            "none";
+
+
+        imageResultActions.classList.add(
+            "show"
+        );
+
+
+        /*
+           Make generated image available
+           inside Image → Video.
+        */
+
+        document
+            .getElementById(
+                "useGeneratedForVideo"
+            )
+            .classList.add(
+                "show"
+            );
+
+
+    }catch(error){
+
+        console.error(
+            "Image generation:",
+            error
+        );
+
+
+        alert(
+            "Image generate nahi ho payi.\n\n" +
+            error.message
+        );
+
+    }finally{
+
+        generateImageBtn.disabled =
+            false;
+
+
+        generateImageBtn.innerHTML = `
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+
+                <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+            </svg>
+
+            Generate Image
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   DOWNLOAD IMAGE
+========================================================= */
+
+downloadImageBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!generatedImageData){
+
+            return;
+
+        }
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            generatedImageData;
+
+
+        link.download =
+            "kuldeep-ai-generated-image.png";
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+    }
+);
+
+
+/* =========================================================
+   IMAGE → VIDEO TAB
+========================================================= */
+
+imageToVideoBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!generatedImageData){
+
+            return;
+
+        }
+
+
+        studioTabs.forEach(
+            tab =>
+                tab.classList.remove(
+                    "active"
+                )
+        );
+
+
+        document
+            .querySelector(
+                '.studio-tab[data-tab="video"]'
+            )
+            .classList.add(
+                "active"
+            );
+
+
+        imagePanel.classList.remove(
+            "active"
+        );
+
+
+        videoPanel.classList.add(
+            "active"
+        );
+
+
+        setVideoImage(
+            generatedImageData
+        );
+
+    }
+);
+
+
+/* =========================================================
+   VIDEO IMAGE UPLOAD
+========================================================= */
+
+const videoImageInput =
+    document.getElementById(
+        "videoImageInput"
+    );
+
+const videoImagePreview =
+    document.getElementById(
+        "videoImagePreview"
+    );
+
+const uploadPlaceholder =
+    document.getElementById(
+        "uploadPlaceholder"
+    );
+
+const imageUploadArea =
+    document.getElementById(
+        "imageUploadArea"
+    );
+
+let videoImageData =
+    null;
+
+let videoImageMime =
+    "image/png";
+
+
+videoImageInput.addEventListener(
+    "change",
+    event => {
+
+        const file =
+            event.target.files?.[0];
+
+
+        if(!file){
+
+            return;
+
+        }
+
+
+        if(
+            ![
+                "image/png",
+                "image/jpeg",
+                "image/webp"
+            ].includes(
+                file.type
+            )
+        ){
+
+            alert(
+                "Please upload PNG, JPG or WebP image."
+            );
+
+            return;
+
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            () => {
+
+                videoImageData =
+                    reader.result;
+
+                videoImageMime =
+                    file.type;
+
+                setVideoImage(
+                    videoImageData
+                );
+
+            };
+
+
+        reader.readAsDataURL(
+            file
+        );
+
+    }
+);
+
+
+/* =========================================================
+   SET VIDEO IMAGE
+========================================================= */
+
+function setVideoImage(
+    dataUrl
+){
+
+    if(!dataUrl){
+
+        return;
+
+    }
+
+
+    videoImageData =
+        dataUrl;
+
+
+    videoImagePreview.src =
+        dataUrl;
+
+
+    videoImagePreview.style.display =
+        "block";
+
+
+    uploadPlaceholder.style.display =
+        "none";
+
+
+    imageUploadArea.classList.add(
+        "has-image"
+    );
+
+}
+
+
+/* =========================================================
+   USE GENERATED IMAGE
+========================================================= */
+
+document
+    .getElementById(
+        "useGeneratedForVideo"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            if(!generatedImageData){
+
+                return;
+
+            }
+
+
+            studioTabs.forEach(
+                tab =>
+                    tab.classList.remove(
+                        "active"
+                    )
+            );
+
+
+            document
+                .querySelector(
+                    '.studio-tab[data-tab="video"]'
+                )
+                .classList.add(
+                    "active"
+                );
+
+
+            imagePanel.classList.remove(
+                "active"
+            );
+
+
+            videoPanel.classList.add(
+                "active"
+            );
+
+
+            setVideoImage(
+                generatedImageData
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   VIDEO GENERATION
+========================================================= */
+
+const videoPrompt =
+    document.getElementById(
+        "videoPrompt"
+    );
+
+const videoAspect =
+    document.getElementById(
+        "videoAspect"
+    );
+
+const generateVideoBtn =
+    document.getElementById(
+        "generateVideoBtn"
+    );
+
+const videoProgress =
+    document.getElementById(
+        "videoProgress"
+    );
+
+const videoProgressStatus =
+    document.getElementById(
+        "videoProgressStatus"
+    );
+
+const videoProgressBar =
+    document.getElementById(
+        "videoProgressBar"
+    );
+
+const generatedVideo =
+    document.getElementById(
+        "generatedVideo"
+    );
+
+const videoEmpty =
+    document.getElementById(
+        "videoEmpty"
+    );
+
+const videoResultActions =
+    document.getElementById(
+        "videoResultActions"
+    );
+
+const downloadVideoBtn =
+    document.getElementById(
+        "downloadVideoBtn"
+    );
+
+
+let generatedVideoUrl =
+    null;
+
+let videoPollingTimer =
+    null;
+
+
+generateVideoBtn.addEventListener(
+    "click",
+    generateVideo
+);
+
+
+async function generateVideo(){
+
+    const prompt =
+        videoPrompt.value.trim();
+
+
+    if(!videoImageData){
+
+        alert(
+            "Pehle ek image upload karo."
+        );
+
+        return;
+
+    }
+
+
+    if(!prompt){
+
+        videoPrompt.focus();
+
+        return;
+
+    }
+
+
+    generateVideoBtn.disabled =
+        true;
+
+
+    generateVideoBtn.innerHTML = `
+
+        <svg viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.8">
+
+            <path d="M12 3v4"/>
+            <path d="M12 17v4"/>
+            <path d="M3 12h4"/>
+            <path d="M17 12h4"/>
+
+        </svg>
+
+        Starting...
+
+    `;
+
+
+    videoProgress.classList.add(
+        "show"
+    );
+
+
+    videoProgressStatus.textContent =
+        "Starting";
+
+
+    videoProgressBar.style.width =
+        "12%";
+
+
+    videoResultActions.classList.remove(
+        "show"
+    );
+
+
+    generatedVideo.style.display =
+        "none";
+
+
+    videoEmpty.style.display =
+        "block";
+
+
+    try{
+
+        const response =
+            await fetch(
+                "/api/generate-video",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        prompt:
+                            prompt,
+
+                        imageData:
+                            videoImageData,
+
+                        mimeType:
+                            videoImageMime,
+
+                        aspectRatio:
+                            videoAspect.value
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data?.error ||
+                "Video generation failed."
+            );
+
+        }
+
+
+        if(
+            !data?.operationName
+        ){
+
+            throw new Error(
+                "Video operation was not created."
+            );
+
+        }
+
+
+        videoProgressStatus.textContent =
+            "Generating";
+
+
+        videoProgressBar.style.width =
+            "25%";
+
+
+        await pollVideo(
+            data.operationName
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Video generation:",
+            error
+        );
+
+
+        videoProgress.classList.remove(
+            "show"
+        );
+
+
+        alert(
+            "Video generate nahi ho payi.\n\n" +
+            error.message
+        );
+
+    }finally{
+
+        generateVideoBtn.disabled =
+            false;
+
+
+        generateVideoBtn.innerHTML = `
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="1.8">
+
+                <path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3z"/>
+
+            </svg>
+
+            Generate Video
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   VIDEO POLLING
+========================================================= */
+
+async function pollVideo(
+    operationName
+){
+
+    let attempts = 0;
+
+    const maxAttempts =
+        60;
+
+
+    while(
+        attempts <
+        maxAttempts
+    ){
+
+        attempts++;
+
+
+        videoProgressStatus.textContent =
+            `Rendering ${Math.min(
+                95,
+                25 + attempts
+            )}%`;
+
+
+        videoProgressBar.style.width =
+            Math.min(
+                95,
+                25 + attempts
+            ) + "%";
+
+
+        const response =
+            await fetch(
+                "/api/video-status",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        operationName:
+                            operationName
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                data?.error ||
+                "Could not check video status."
+            );
+
+        }
+
+
+        if(data.done){
+
+            if(
+                !data.videoUrl
+            ){
+
+                throw new Error(
+                    "Video completed but no video URL was returned."
+                );
+
+            }
+
+
+            generatedVideoUrl =
+                data.videoUrl;
+
+
+            generatedVideo.src =
+                generatedVideoUrl;
+
+
+            generatedVideo.style.display =
+                "block";
+
+
+            videoEmpty.style.display =
+                "none";
+
+
+            videoProgressStatus.textContent =
+                "Complete";
+
+
+            videoProgressBar.style.width =
+                "100%";
+
+
+            videoResultActions.classList.add(
+                "show"
+            );
+
+
+            videoProgress.classList.remove(
+                "show"
+            );
+
+
+            generatedVideo.load();
+
+
+            return;
+
+        }
+
+
+        await sleep(
+            10000
+        );
+
+    }
+
+
+    throw new Error(
+        "Video generation timed out. Please try again."
+    );
+
+}
+
+
+/* =========================================================
+   SLEEP
+========================================================= */
+
+function sleep(
+    milliseconds
+){
+
+    return new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                milliseconds
+            )
+    );
+
+}
+
+
+/* =========================================================
+   DOWNLOAD VIDEO
+========================================================= */
+
+downloadVideoBtn.addEventListener(
+    "click",
+    async () => {
+
+        if(!generatedVideoUrl){
+
+            return;
+
+        }
+
+
+        try{
+
+            const response =
+                await fetch(
+                    generatedVideoUrl
+                );
+
+
+            if(!response.ok){
+
+                throw new Error(
+                    "Video download failed."
+                );
+
+            }
+
+
+            const blob =
+                await response.blob();
+
+
+            const url =
+                URL.createObjectURL(
+                    blob
+                );
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                url;
+
+
+            link.download =
+                "kuldeep-ai-generated-video.mp4";
+
+
+            document.body.appendChild(
+                link
+            );
+
+
+            link.click();
+
+
+            link.remove();
+
+
+            setTimeout(
+                () => {
+                    URL.revokeObjectURL(
+                        url
+                    );
+                },
+                1000
+            );
+
+        }catch(error){
+
+            console.error(
+                error
+            );
+
+
+            /*
+               Fallback: open video
+               in a new tab.
+            */
+
+            window.open(
+                generatedVideoUrl,
+                "_blank"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    INIT
-========================================= */
+========================================================= */
 
 loadStorage();
 
@@ -2963,17 +6083,20 @@ restoreCurrentChat();
 promptInput.focus();
 
 
-/* =========================================
+/* =========================================================
    PWA
-========================================= */
+========================================================= */
 
-if("serviceWorker" in navigator){
+if(
+    "serviceWorker" in navigator
+){
 
     window.addEventListener(
         "load",
         () => {
 
-            navigator.serviceWorker
+            navigator
+                .serviceWorker
                 .register(
                     "/service-worker.js"
                 )
